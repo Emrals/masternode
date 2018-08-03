@@ -1,4 +1,4 @@
-Mun Masternode Setup and Maintenance Guide
+Emrals Masternode Setup and Maintenance Guide
 ==========================================
 
 While it is possible to run masternodes (MN) both in a local wallet as well as in a separate instance on Windows this
@@ -15,12 +15,12 @@ Automated masternode installation
 If you have a VPS already setup you can use this script to install the binaries and pre-configure the config files.
 Installs under the root.
 ```
-wget https://github.com/muncrypto/masternode/raw/master/install.sh
+wget https://github.com/emrals/masternode/raw/master/install.sh
 chmod +x install.sh
 ./install.sh
 ```
-After script execution you will need to check the file ~/.muncore/mun.conf to make sure your MN privkey matches the
-generated one and edit the file ~/.muncore/masternode.conf in accordance with the rest of masternode setup guide described below.
+After script execution you will need to check the file ~/.emralscore/emrals.conf to make sure your MN privkey matches the
+generated one and edit the file ~/.emralscore/masternode.conf in accordance with the rest of masternode setup guide described below.
 
 Creating MN keys for a VPS instance in your local qt wallet
 ---------------------------------------------------------
@@ -136,7 +136,7 @@ tools you will need are:
 
 “ls” – list files in the current directory
 
-“ls -la” – list files in the current directory including hidden files (.muncore is one of them)
+“ls -la” – list files in the current directory including hidden files (.emralscore is one of them)
 
 “pwd” – get current directory
 
@@ -174,37 +174,37 @@ apt-get install libdb4.8-dev libdb4.8++-dev
 ```
 VPS node configuration
 ----------------------
-Create mun directory and switch to it:
+Create emrals directory and switch to it:
 ```
-mkdir mun
-cd mun
+mkdir emrals
+cd emrals
 ```
 Download and extract linux binaries:
 ```
-wget https://github.com/muncrypto/muncoin/releases/download/v0.1.0.2/muncoin_0.1.0.2_ubuntu_16.04.tar.gz
-tar -xvf muncoin_0.1.0.2_ubuntu_16.04.tar.gz
+wget https://github.com/Emrals/emrals/releases/download/v1.0.2.6/linux-x64.tar.gz
+tar -xvf linux-x64.tar.gz
 ```
 
-You should have now the daemon mund and wallet mun-cli files in /home/YOURUSERNAME/mun directory. Start the daemon:
+You should have now the daemon emralsd and wallet emrals-cli files in /home/YOURUSERNAME/emrals directory. Start the daemon:
 ```
-./mund -daemon
+./emralsd -daemon
 ```
-You should see the output: Mun Core server starting
+You should see the output: Emrals Core server starting
 
 Now stop the server:
 ```
-./mun-cli stop
+./emrals-cli stop
 ```
-You should see the output: Mun Core server stopping
-What this should have accomplished is creating a .muncore directory in your home directory and populating it with the
+You should see the output: Emrals Core server stopping
+What this should have accomplished is creating a .emralscore directory in your home directory and populating it with the
 config files so that you would not need to create them yourself.
-Go into .muncore directory:
+Go into .emralscore directory:
 ```
-cd ~/.muncore
+cd ~/.emralscore
 ```
-You will need to edit 2 files : mun.conf and masternode.conf with nano or any other text editor:
+You will need to edit 2 files : emrals.conf and masternode.conf with nano or any other text editor:
 
-In mun.conf you need to create unique user name, user password, masternode priv key (created in the qt local wallet
+In emrals.conf you need to create unique user name, user password, masternode priv key (created in the qt local wallet
 step):
 ```
 rpcuser=YOUR_USER_NAME
@@ -231,13 +231,13 @@ mn1 45.76.250.89:12548 92TPhvQjKd5vMiBcwbRpq3g4CnPVGUAZGrorZJPNJoohgCu9QkF a9b31
 
 Now you can start the daemon again. Start the daemon:
 ```
-./mund -daemon
+./emralsd -daemon
 ```
-You should see the output: Mun Core server starting
+You should see the output: Emrals Core server starting
 
 Let’s observe the node synchronization process. Execute:
 ```
-./mun-cli getinfo
+./emrals-cli getinfo
 ```
 The output should look similar to:
 ```
@@ -265,7 +265,7 @@ wallet and block explorer.
 
 More checking:
 ```
-./mun-cli mnsync status
+./emrals-cli mnsync status
 ```
 Should produce an output similar to:
 ```
@@ -285,7 +285,7 @@ Periodically running the same command you will be able to see as different phase
 blockchain, MN list, MN winners list synchronized one by one.
 Now you can check the masternode status:
 ```
-./mun-cli masternode status
+./emrals-cli masternode status
 ```
 The output from an uninitialized MN will be similar to:
 ```
@@ -307,7 +307,7 @@ nodes and place them at the end of the paying queue.
 The status should change to “PRE_ENABLED” and some time later to “ENABLED” (varies, allow for up to 30 minutes). Check
 the masternode status on the VPS:
 ```
-./mun-cli masternode status
+./emrals-cli masternode status
 ```
 The output from an uninitialized MN will be similar to:
 ```
@@ -319,22 +319,22 @@ The output from an uninitialized MN will be similar to:
 }
 ```
 
-Testnet masternodes: make sure to use port 22548 and edit the config files ~/.muncore/mun.conf and
-~/.muncore/testnet3/masternode.conf. The testnet3 folder is created on the first run of the daemon with the testnet flag
+Testnet masternodes: make sure to use port 22548 and edit the config files ~/.emralscore/emrals.conf and
+~/.emralscore/testnet3/masternode.conf. The testnet3 folder is created on the first run of the daemon with the testnet flag
 or you can create it yourself. Start both the vps and local nodes with the flag -testnet or include line testnet=1 in
-the mun.conf file. Multiple nodes can be all managed through the same local wallet file, the local (hot wallet)
+the emrals.conf file. Multiple nodes can be all managed through the same local wallet file, the local (hot wallet)
 masternode.conf file will include one line per masternode. 
 
 Troubleshooting
 ---------------
 If there is a fork or the node daemon is stuck for some other reason, you can try doing the following:
-1. Stop the daemon from the mun directory ./mun-cli stop
- If you change rpcuser, rpcpassword or rpcport parameters of mun.conf while the daemon is running you will not be able
+1. Stop the daemon from the emrals directory ./emrals-cli stop
+ If you change rpcuser, rpcpassword or rpcport parameters of emrals.conf while the daemon is running you will not be able
 to stop the daemon via the cli wallet. Then find the process by name:
 ```
-ps -A | grep mun
+ps -A | grep emrals
 ```
-A typical output is: 3167 ?        00:04:12 mund
+A typical output is: 3167 ?        00:04:12 emralsd
 Then kill the process by its id:
 ```
 sudo kill 3167
@@ -345,13 +345,13 @@ it exactly once in my experience with MNs):
 sudo kill -9 3167
 ```
 
-Now go to the ~/.muncore directory and delete all files and directories except for the mun.conf and masternode.conf
+Now go to the ~/.emralscore directory and delete all files and directories except for the emrals.conf and masternode.conf
 files via “rm -rf list_of_items_to_delete” command. Then start the daemon.
 
 If the masternode appears healthy but you are worried about payments not being when expected you can check if your node
 address is on the list of masternode winners from either the cli wallet or the debug window:
 ```
-./mun-cli masternode winners
+./emrals-cli masternode winners
 ```
 The output should have all block assignments to MNs that will be paid from these blocks chosen by consensus vote by all
 MNs, similar to this snapshot from the testnet:
@@ -407,7 +407,7 @@ normal behavior and you will need to install a sentinel. If your node is ENABLED
 install sentinel script until further notice when the governance and superblocks are enabled and proper voting rights
 will be essential.
 This guide covers the installation of the sentinel on a VPS running Ubuntu 16.04 where your MN is setup.
-Make sure the mun.conf is fully configured as described in the masternode setup guide and contains rpc user name,
+Make sure the emrals.conf is fully configured as described in the masternode setup guide and contains rpc user name,
 password, and a line “server=1” that allows for the node to listen to rpc commands otherwise you will get “Connection
 refused” error.
 
@@ -418,8 +418,8 @@ python --version
 The output should be 2.7.x, for example: Python 2.7.12
 Clone sentinel script in a new directory under your home directory and switch to it:
 ```
-cd ~/mun
-git clone https://github.com/muncrypto/sentinel.git
+cd ~/emrals
+git clone https://github.com/emrals/sentinel.git
 ```
 Switch to sentinel directory:
 ```
@@ -442,13 +442,13 @@ Restore the python environment locally:
 ```
 ./venv/bin/pip install -r requirements.txt
 ```
-Edit the location of your mun.conf file only if it is not at the default location, such as when you use the -datadir=…
+Edit the location of your emrals.conf file only if it is not at the default location, such as when you use the -datadir=…
 option, then change it for both the main script as well as for the test script:
 In file sentinel.conf uncomment and modify line:
 ```
-mun_conf=/home/YOURUSERNAME/.muncore/mun.conf
+emrals_conf=/home/YOURUSERNAME/.emralscore/emrals.conf
 ```
-In file test/test_sentinel.conf insert the same line to specify the path to mun.conf.
+In file test/test_sentinel.conf insert the same line to specify the path to emrals.conf.
 Test the sentinel configuration by executing the test script:
 ```
 ./venv/bin/py.test ./test
@@ -457,15 +457,15 @@ The output should be:
 ```
 ======================== test session starts ===================================
 platform linux2 -- Python 2.7.12, pytest-3.0.1, py-1.4.31, pluggy-0.3.1
-rootdir: /home/YOURUSERNAME/mun/sentinel, inifile: 
+rootdir: /home/YOURUSERNAME/emrals/sentinel, inifile: 
 collected 14 items 
 
 test/integration/test_jsonrpc.py .
 test/unit/test_misc.py .
 test/unit/test_models.py ..
-test/unit/test_mun_config.py .
-test/unit/test_mund_data_shims.py ..
-test/unit/test_muny_things.py ......
+test/unit/test_emrals_config.py .
+test/unit/test_emralsd_data_shims.py ..
+test/unit/test_emralsy_things.py ......
 test/unit/test_submit_command.py .
 
 ======================== 14 passed in 0.16 seconds =============================
@@ -473,7 +473,7 @@ test/unit/test_submit_command.py .
 Add the sentinel to your periodic task scheduler so that it runs every minute a command to get into your sentinel
 directory and run a python script without reporting any errors:
 ```
-* * * * * cd /home/YOURUSERNAME/mun/sentinel && ./venv/bin/python bin/sentinel.py >/dev/null 2>&1
+* * * * * cd /home/YOURUSERNAME/emrals/sentinel && ./venv/bin/python bin/sentinel.py >/dev/null 2>&1
 ```
 
 To view debug output set the sentinel environment variable to anything non-zero then run the script:
