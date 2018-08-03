@@ -13,7 +13,7 @@ sudo add-apt-repository -y ppa:bitcoin/bitcoin
 sudo apt-get update -y
 sudo apt-get install -y libdb4.8-dev libdb4.8++-dev
 mkdir /root/temp
-sudo git clone https://github.com/muncrypto/muncoin /root/temp
+sudo git clone https://github.com/emrals/emrals /root/temp
 chmod -R 755 /root/temp
 cd /root/temp
 ./autogen.sh
@@ -21,31 +21,31 @@ cd /root/temp
 make
 make install
 cd
-mkdir /root/muncore
-mkdir /root/.muncore
-cp /root/temp/src/mund /root/muncore
-cp /root/temp/src/mun-cli /root/muncore
-chmod -R 755 /root/muncore
-chmod -R 755 /root/.muncore
+mkdir /root/emralscore
+mkdir /root/.emralscore
+cp /root/temp/src/emralsd /root/emralscore
+cp /root/temp/src/emrals-cli /root/emralscore
+chmod -R 755 /root/emralscore
+chmod -R 755 /root/.emralscore
 sudo apt-get install -y pwgen
 GEN_PASS=$(pwgen -1 -n 20)
-echo -e "rpcuser=muncoinuser\nrpcpassword=${GEN_PASS}\nrpcport=12547\nport=12548\nlisten=1\nmaxconnections=256" >> /root/.muncore/mun.conf
-cd /root/muncore
-./mund -daemon
+echo -e "rpcuser=emralscoinuser\nrpcpassword=${GEN_PASS}\nrpcport=12547\nport=12548\nlisten=1\nmaxconnections=256" >> /root/.emralscore/emrals.conf
+cd /root/emralscore
+./emralsd -daemon
 sleep 10
-masternodekey=$(./mun-cli masternode genkey)
-./mun-cli stop
-echo -e "masternode=1\nmasternodeprivkey=$masternodekey" >> /root/.muncore/mun.conf
-./mund -daemon
-cd /root/.muncore
+masternodekey=$(./emrals-cli masternode genkey)
+./emrals-cli stop
+echo -e "masternode=1\nmasternodeprivkey=$masternodekey" >> /root/.emralscore/emrals.conf
+./emralsd -daemon
+cd /root/.emralscore
 sudo apt-get install -y virtualenv
-git clone https://github.com/muncrypto/sentinel.git
+git clone https://github.com/emrals/sentinel.git
 cd sentinel
 virtualenv ./venv
 ./venv/bin/pip install -r requirements.txt
-sudo echo "muncoin_conf=/root/.muncore/mun.conf" >> /root/.muncore/sentinel/sentinel.conf
+sudo echo "emralscoin_conf=/root/.emralscore/emrals.conf" >> /root/.emralscore/sentinel/sentinel.conf
 sudo crontab -l >> tempcron
-sudo echo "* * * * * cd /root/.muncore/sentinel && ./venv/bin/python bin/sentinel.py 2>&1 >> sentinel-cron.log" >> tempcron
+sudo echo "* * * * * cd /root/.emralscore/sentinel && ./venv/bin/python bin/sentinel.py 2>&1 >> sentinel-cron.log" >> tempcron
 sudo crontab tempcron
 rm tempcron
 echo "Masternode private key: $masternodekey"
