@@ -31,7 +31,7 @@ emralsd -daemon
 sleep 10
 masternodekey=$(./emrals-cli masternode genkey)
 emrals-cli stop
-echo -e "masternode=1\nmasternodeprivkey=$masternodekey" >> /root/.emralscore/emrals.conf
+echo -e "masternode=1\nmasternodeprivkey=$masternodekey" >> ~/.emralscore/emrals.conf
 emralsd -daemon
 
 echo "Masternode private key: $masternodekey"
