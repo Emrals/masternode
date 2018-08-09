@@ -12,28 +12,27 @@ sudo apt-get install -y nano htop git build-essential libtool autotools-dev auto
 sudo add-apt-repository -y ppa:bitcoin/bitcoin
 sudo apt-get update -y
 sudo apt-get install -y libdb4.8-dev libdb4.8++-dev
-mkdir emrals
-cd emrals
+sudo apt-get install -y pwgen
+
 wget https://github.com/Emrals/emrals/releases/download/v1.0.2.6/linux-x64.tar.gz
 tar xzfv linux-x64.tar.gz
 
-cd
-mkdir ~/emralscore
+cp emralsd /usr/local/bin/
+cp emrals-cli /usr/local/bin
+chmod -R 755 /usr/local/bin/emralsd
+chmod -R 755 /usr/local/bin/emrals-cli
 mkdir ~/.emralscore
-cp emralsd ~/emralscore
-cp emrals-cli ~/emralscore
-chmod -R 755 ~/emralscore
 chmod -R 755 ~/.emralscore
-sudo apt-get install -y pwgen
+
 GEN_PASS=$(pwgen -1 -n 30)
 echo -e "rpcuser=emralscoinuser\nrpcpassword=${GEN_PASS}\nrpcport=30000\nport=30001\nlisten=1\nmaxconnections=256" >> ~/.emralscore/emrals.conf
-cd ~/emralscore
-./emralsd -daemon
+
+emralsd -daemon
 sleep 10
 masternodekey=$(./emrals-cli masternode genkey)
-./emrals-cli stop
+emrals-cli stop
 echo -e "masternode=1\nmasternodeprivkey=$masternodekey" >> /root/.emralscore/emrals.conf
-./emralsd -daemon
+emralsd -daemon
 
 echo "Masternode private key: $masternodekey"
 echo "Job completed successfully" 
