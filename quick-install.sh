@@ -17,10 +17,10 @@ sudo apt-get install -y pwgen
 wget https://github.com/Emrals/emrals/releases/download/v1.0.2.6/linux-x64.tar.gz
 tar xzfv linux-x64.tar.gz
 
-cp emralsd /usr/local/bin/
-cp emrals-cli /usr/local/bin
-chmod -R 755 /usr/local/bin/emralsd
-chmod -R 755 /usr/local/bin/emrals-cli
+sudo cp emralsd /usr/local/bin/
+sudo cp emrals-cli /usr/local/bin
+sudo chmod -R 755 /usr/local/bin/emralsd
+sudo chmod -R 755 /usr/local/bin/emrals-cli
 mkdir ~/.emralscore
 chmod -R 755 ~/.emralscore
 
