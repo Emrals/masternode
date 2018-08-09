@@ -25,7 +25,7 @@ mkdir ~/.emralscore
 chmod -R 755 ~/.emralscore
 
 GEN_PASS=$(pwgen -1 -n 30)
-echo -e "rpcuser=emralscoinuser\nrpcpassword=${GEN_PASS}\nrpcport=30000\nport=30001\nlisten=1\nmaxconnections=256" >> ~/.emralscore/emrals.conf
+echo -e "rpcuser=emralscoinuser\nrpcpassword=${GEN_PASS}\nrpcport=30000\nport=30001\nlisten=1\nmaxconnections=256" > ~/.emralscore/emrals.conf
 
 emralsd -daemon
 sleep 10
