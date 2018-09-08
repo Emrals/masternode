@@ -14,7 +14,7 @@ sudo apt-get update -y
 sudo apt-get install -y libdb4.8-dev libdb4.8++-dev
 sudo apt-get install -y pwgen
 
-wget https://github.com/Emrals/emrals/releases/download/v1.0.2.6/linux-x64.tar.gz
+wget https://github.com/Emrals/emrals/releases/download/v0.12.2.4.2/linux-x64.tar.gz
 tar xzfv linux-x64.tar.gz
 
 sudo cp emralsd /usr/local/bin/
