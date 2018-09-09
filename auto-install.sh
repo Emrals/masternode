@@ -6,6 +6,7 @@ CONFIGFOLDER='/root/.emralscore'
 COIN_DAEMON='/usr/local/bin/emralsd'
 COIN_CLI='/usr/local/bin/emrals-cli'
 COIN_REPO='https://github.com/Emrals/emrals/releases/download/v0.12.2.4.2/linux-x64.tar.gz'
+SENTINEL_REPO='https://github.com/Emrals/sentinel.git'
 COIN_NAME='EMRALS'
 COIN_PORT=30001
 
@@ -16,6 +17,18 @@ NODEIP=$(curl -s4 icanhazip.com)
 RED='\e[93m'
 GREEN='\e[932'
 NC='\033[0m'
+
+function install_sentinel() {
+  echo -e "${GREEN}Install sentinel.${NC}"
+  apt-get -y install python-virtualenv virtualenv >/dev/null 2>&1
+  git clone $SENTINEL_REPO $CONFIGFOLDER/sentinel >/dev/null 2>&1
+  cd $CONFIGFOLDER/sentinel
+  virtualenv ./venv >/dev/null 2>&1  
+  ./venv/bin/pip install -r requirements.txt >/dev/null 2>&1
+  echo  "* * * * * cd $CONFIGFOLDER/sentinel && ./venv/bin/python bin/sentinel.py >> $CONFIG_FOLDER/sentinel.log 2>&1" > $CONFIGFOLDER/$COIN_NAME.cron
+  crontab $CONFIGFOLDER/$COIN_NAME.cron
+  rm $CONFIGFOLDER/$COIN_NAME.cron >/dev/null 2>&1
+}
 
 function compile_node() {
   echo -e "THIS SCRIPT IS CREATED BY UDAYDEEP - Discord Name : Linux-Master-Dev : ID : #0974 and modified for Emrals by emrals.com"
@@ -300,6 +313,7 @@ function setup_node() {
   create_key
   update_config
   enable_firewall
+  install_sentinel
   important_information
   if (( $UBUNTU_VERSION == 16 )); then
     configure_systemd
