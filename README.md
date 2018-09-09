@@ -16,7 +16,7 @@ New Automated masternode installation
 ```
 wget https://raw.githubusercontent.com/Emrals/masternode/master/auto-install.sh && chmod +x auto-install.sh && ./auto-install.sh
 ```
-This script will walk you though the complete setup. 
+This script will setup everything on the VPS automatically. Make sure you have the key from the step below.
 
 Automated masternode installation
 ---------------------------------
