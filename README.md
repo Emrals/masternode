@@ -10,6 +10,14 @@ What you will need
 - a qt wallet with at least 1000 coins
 - a VPS instance running Linux, this setup is using Ubuntu 16.04 64-bit.
 
+
+New Automated masternode installation
+---------------------------------
+```
+wget https://raw.githubusercontent.com/Emrals/masternode/master/auto-install.sh && chmod +x auto-install.sh && ./auto-install.sh
+```
+This script will walk you though the complete setup. 
+
 Automated masternode installation
 ---------------------------------
 If you have a VPS already setup you can use this script to install the binaries and pre-configure the config files.
