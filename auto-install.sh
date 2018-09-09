@@ -239,7 +239,7 @@ fi
 }
 
 function prepare_system() {
-echo -e "Configuring system to install ${YELLOW}$COIN_NAME${NC} masternode. Please wait, it may take some time for the compete installation get finish."
+echo -e "Configuring system to install ${YELLOW}$COIN_NAME${NC} masternode. Please wait, it may take some time for the compete installation to finish."
 apt-get update >/dev/null 2>&1
 DEBIAN_FRONTEND=noninteractive apt-get update > /dev/null 2>&1
 DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y -qq upgrade >/dev/null 2>&1
