@@ -39,14 +39,14 @@ echo -e "masternode=1\nmasternodeprivkey=$masternodekey" >> /root/.emralscore/em
 ./emralsd -daemon
 cd /root/.emralscore
 sudo apt-get install -y virtualenv
-#git clone https://github.com/emrals/sentinel.git
-#cd sentinel
-#virtualenv ./venv
-#./venv/bin/pip install -r requirements.txt
-#sudo echo "emralscoin_conf=/root/.emralscore/emrals.conf" >> /root/.emralscore/sentinel/sentinel.conf
-#sudo crontab -l >> tempcron
-#sudo echo "* * * * * cd /root/.emralscore/sentinel && ./venv/bin/python bin/sentinel.py 2>&1 >> sentinel-cron.log" >> tempcron
-#sudo crontab tempcron
-#rm tempcron
+git clone https://github.com/emrals/sentinel.git
+cd sentinel
+virtualenv ./venv
+./venv/bin/pip install -r requirements.txt
+sudo echo "emralscoin_conf=/root/.emralscore/emrals.conf" >> /root/.emralscore/sentinel/sentinel.conf
+sudo crontab -l >> tempcron
+sudo echo "* * * * * cd /root/.emralscore/sentinel && ./venv/bin/python bin/sentinel.py 2>&1 >> sentinel-cron.log" >> tempcron
+sudo crontab tempcron
+rm tempcron
 echo "Masternode private key: $masternodekey"
 echo "Job completed successfully" 
