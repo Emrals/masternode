@@ -333,7 +333,7 @@ setup_node
 echo -e "${RED}=> DOWNLOADING EXTRA STABLE PEERS & LATEST BLOCKCHAIN TO SYNC WALLET ALMOST INSTANTLY${NC}"
 sleep 20
 echo -e "${RED}=> EMRALS SERVER STOPPED${NC}"
-systemctl stop EMRALS.service && wget http://node1.emrals.com/blockchain.tar.gz && cp blockchain.tar.gz ~/.emralscore && cd && cd .emralscore && rm -R blocks && rm -R chainstate && rm peers.dat && tar -xzf blockchain.tar.gz && systemctl start EMRALS.service
+systemctl stop EMRALS.service && wget http://node1.emrals.com/blockchain.tar.gz && cp blockchain.tar.gz ~/.emralscore && cd && cd .emralscore && rm -R blocks && rm -R chainstate && rm -f peers.dat && tar -xzf blockchain.tar.gz && systemctl start EMRALS.service
 echo -e "${RED}=> EMRALS SERVER STARTED${NC}"
 echo -e "${RED}=> CORRECTING ANY MISSING ACCUMULATORS . AFTER SUCCESSFULL SETUP "emrals-cli getinfo" COMMAND WILL BE EXECUTED FOR YOU TO CHECK THE ALREADY SYNCED BLOCKCHAIN${NC}"
 sleep 25
