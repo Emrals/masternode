@@ -8,61 +8,47 @@ a MN instance.
 What you will need
 ------------------
 - a qt wallet with at least 1000 coins
-- a VPS instance running Linux, this setup is using Ubuntu 16.04 64-bit.
+- a VPS instance running Linux, https://www.vultr.com/?ref=7265960.
 
-
-New Automated masternode installation
----------------------------------
-```
-wget https://raw.githubusercontent.com/Emrals/masternode/master/auto-install.sh && chmod +x auto-install.sh && ./auto-install.sh
-```
-This script will setup everything on the VPS automatically. Make sure you have the key from the step below.
-
-Automated masternode installation
----------------------------------
-If you have a VPS already setup you can use this script to install the binaries and pre-configure the config files.
-Installs under the root.
-```
-wget https://github.com/emrals/masternode/raw/master/install.sh
-chmod +x install.sh
-./install.sh
-```
-After script execution you will need to check the file ~/.emralscore/emrals.conf to make sure your MN privkey matches the
-generated one and edit the file ~/.emralscore/masternode.conf in accordance with the rest of masternode setup guide described below.
 
 Creating MN keys for a VPS instance in your local qt wallet
 ---------------------------------------------------------
-1. Start qt wallet. Go to menu Wallet→ Options and check “Enable coin control features” and “Show Masternodes Tab”. You
-will need to restart the wallet for these to show up.
-2. Create a new receiving address. Open menu File→ Receiving addressess…
+1. Create a new receiving address. Open menu File→ Receiving addressess…
 Click “+” button and enter a name for the address, for example mn1.
-3. Send exactly 1000 coins to this mn1 address. Wait for 15 confirmations of this transaction.
-4. Open a debug window via menu Tools→Debug window.
-5. Execute “masternode genkey” command. This will output your MN priv key, for example:
+2. Send exactly 1000 coins to this mn1 address. Wait for 15 confirmations of this transaction.
+3. Open a debug window via menu Tools→Debug window.
+4. Execute “masternode genkey” command. This will output your MN priv key, for example:
 92TPhvQjKd5vMiBcwbRpq3g4CnPVGUAZGrorZJPNJoohgCu9QkF. Save it.
-6. Execute “masternode outputs” command. This will output TX and output pairs of numbers, for example:
+5. Execute “masternode outputs” command. This will output TX and output pairs of numbers, for example:
 ```
 {
 “a9b31238d062ccb5f4b1eb6c3041d369cc014f5e6df38d2d303d791acd4302f2”: “0”
 }
 ```
 Save both of these numbers.
-7. Open the masternode.conf file via menu Tools→ Open Masternode Configuration File.
+6. Open the masternode.conf file via menu Tools→ Open Masternode Configuration File.
 Without any blank lines type in a space-delimited single line:
 ```
-mn1 YOUR_VPS_IP:12548 YOURPRIVKEY TX_OUTPUT TX_ID
+mn1 YOUR_VPS_IP:30001 YOURPRIVKEY TX_OUTPUT TX_ID
 ```
 For example:
 ```
-mn1 45.76.250.89:12548 92TPhvQjKd5vMiBcwbRpq3g4CnPVGUAZGrorZJPNJoohgCu9QkF a9b31238d062ccb5f4b1eb6c3041d369cc014f5e6df28d2d303d791acd4302f2 0
+mn1 45.76.250.89:30001 92TPhvQjKd5vMiBcwbRpq3g4CnPVGUAZGrorZJPNJoohgCu9QkF a9b31238d062ccb5f4b1eb6c3041d369cc014f5e6df28d2d303d791acd4302f2 0
 ```
-8. Restart the wallet and go to the “Masternodes” tab. There in the tab “My Masternodes” you should see the entry of
+7. Restart the wallet and go to the “Masternodes” tab. There in the tab “My Masternodes” you should see the entry of
 your masternode with the status “MISSING”.
-9. It is useful to lock the account holding the MN coins so that it would not be accidentally spent. To do this, if you
-have not done this yet go to the menu Settings→Options, choose tab Wallet, check the box “Enable coin control features”,
-then restart the wallet. Go to the Send tab, click “Inputs”, select “List mode”, select the line with your MN and 1000
-coins in it, right click on it and select “Lock unspent”. The line should be grayed out now with a lock icon on it. To
-unlock chose “Unlock unspent”.
+
+
+Automated masternode installation
+---------------------------------
+```
+wget https://raw.githubusercontent.com/Emrals/masternode/master/auto-install.sh && chmod +x auto-install.sh && ./auto-install.sh
+```
+This script will setup everything on the VPS automatically use the MN priv key from above. With this method you can skip everything below. 
+
+
+You can skip everything below if you ran the Automated masternode installation
+---------------------------------
 
 Setting up a VPS
 ----------------
