@@ -6,4 +6,5 @@ cp /usr/local/bin/emralsd emralsd-bak-v0.12.2.5.2
 killall emralsd
 sudo cp emralsd /usr/local/bin/emralsd
 sudo cp emrals-cli /usr/local/bin/emrals-cli
-emralsd -reindex
+#emralsd -reindex
+emralsd
