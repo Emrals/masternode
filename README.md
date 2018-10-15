@@ -474,3 +474,8 @@ To view debug output set the sentinel environment variable to anything non-zero 
 ```
 SENTINEL_DEBUG=1 ./venv/bin/python bin/sentinel.py
 ```
+
+to update an existing masternode:
+```
+wget https://raw.githubusercontent.com/Emrals/masternode/master/update.sh && chmod +x update.sh && ./update.sh
+```
