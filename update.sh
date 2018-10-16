@@ -8,6 +8,9 @@ cp /usr/local/bin/emrals-cli emrals-cli-bak-v0.12.2.5.2
 killall emralsd
 sudo cp emralsd /usr/local/bin/emralsd
 sudo cp emrals-cli /usr/local/bin/emrals-cli
-#emralsd -reindex
 systemctl start EMRALS.service
-emralsd
+if ! pgrep -x "emralsd" > /dev/null
+then
+    emralsd
+fi
+
