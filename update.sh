@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "Updating EMRALS to v0.12.2.5"
 systemctl stop EMRALS.service
 sleep 10
 wget https://github.com/Emrals/emrals/releases/download/v0.12.2.5.2/linux-x64.tar.gz
