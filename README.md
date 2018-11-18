@@ -65,7 +65,7 @@ Plenty of YouTube videos are also available.
 
 Popular VPS providers are:
 
-https://www.vultr.com/
+https://www.vultr.com/?ref=7265960
 
 https://www.woothosting.com/
 
