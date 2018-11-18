@@ -111,10 +111,10 @@ passwd YOUR_USERNAME
 10. Exit the putty terminal by typing “exit” or closing the window. Connect again but now user your new username and
 password. Now to execute any commands that require admin priviledges you need to use prefix “sudo”.
 11. Vultr already has the popular firewall ufw installed, on other distros or providers you may need to install it. Open
-ports 22 for ssh and 12548 for the masternode P2P network (22548 for testnet). Then enable the firewall.
+ports 22 for ssh and 30001 for the masternode P2P network (22548 for testnet). Then enable the firewall.
 ```
 sudo ufw allow 22
-sudo ufw allow 12548
+sudo ufw allow 30001
 sudo ufw enable
 ```
 To check current rules on an inactive ufw:
@@ -203,7 +203,7 @@ step):
 ```
 rpcuser=YOUR_USER_NAME
 rpcpassword=YOUR_PASSWORD
-rpcport=12547
+rpcport=30000
 rpcallowip=127.0.0.1
 listen=1
 server=1
@@ -216,11 +216,11 @@ masternodeprivkey=YOUR_MASTERNODE_PRIV_KEY
 
 In masternode.conf file you need to copy/paste the line from the masternodes.conf file in the qt local wallet:
 ```
-mn1 YOUR_VPS_IP:12548 YOUR_MASTERNODE_PRIV_KEY TX_OUTPUT TX_ID
+mn1 YOUR_VPS_IP:30001 YOUR_MASTERNODE_PRIV_KEY TX_OUTPUT TX_ID
 ```
 For example:
 ```
-mn1 45.76.250.89:12548 92TPhvQjKd5vMiBcwbRpq3g4CnPVGUAZGrorZJPNJoohgCu9QkF a9b31238d062ccb5f4b1eb6c3041d369cc014f5e6df28d2d303d791acd4302f2 0
+mn1 45.76.250.89:30001 92TPhvQjKd5vMiBcwbRpq3g4CnPVGUAZGrorZJPNJoohgCu9QkF a9b31238d062ccb5f4b1eb6c3041d369cc014f5e6df28d2d303d791acd4302f2 0
 ```
 
 Now you can start the daemon again. Start the daemon:
@@ -285,7 +285,7 @@ The output from an uninitialized MN will be similar to:
 ```
 { 
   "outpoint": "0000000000000000000000000000000000000000000000000000000000000000-4294967295",
-  "service": "45.76.250.89:12548",
+  "service": "45.76.250.89:30001",
   "status": "Not capable masternode: Masternode not in masternode list"
 }
 ```
@@ -307,7 +307,7 @@ The output from an uninitialized MN will be similar to:
 ```
 { 
   "outpoint": "112f474f1e9701bfa424f5837dda3c6b3ae2454d44cabc593f299879fd790527-1",
-  "service": "45.76.250.89:12548",
+  "service": "45.76.250.89:30001",
   "payee": "MbhkCopfkW7HVycCw7NkY7SAdFK9uVmjSr",
   "status": "Masternode successfully started"
 }
