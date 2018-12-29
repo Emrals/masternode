@@ -42,7 +42,7 @@ your masternode with the status “MISSING”.
 Automated masternode installation
 ---------------------------------
 ```
-wget -O https://raw.githubusercontent.com/Emrals/masternode/master/auto-install.sh && chmod +x auto-install.sh && ./auto-install.sh
+wget https://raw.githubusercontent.com/Emrals/masternode/master/auto-install.sh -O auto-install.sh && chmod +x auto-install.sh && ./auto-install.sh
 ```
 This script will setup everything on the VPS automatically use the MN priv key from above. With this method you can skip everything below. 
 
